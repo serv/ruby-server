@@ -27,8 +27,6 @@ group :development, :test do
 
   gem 'puma'
 
-  gem 'rspec-rails'
-
   # Deployment tools
   gem 'capistrano'
   gem 'capistrano-bundler'
@@ -37,4 +35,9 @@ group :development, :test do
   gem 'capistrano-rvm'
   gem 'capistrano-sidekiq'
   gem 'capistrano-git-submodule-strategy', '~> 0.1.22'
+end
+
+group :test do
+  gem 'rspec-rails', '~> 3.5', '>= 3.5.2'
+  gem 'shoulda-matchers', '~> 3.1'
 end

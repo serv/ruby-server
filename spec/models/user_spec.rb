@@ -1,43 +1,29 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  context "with a User class" do
-    
-    it "can hash a password" do
-      p = User.hash_password("test")
 
-      expect(p).not_to eql("test")
-    end
+  context 'attributes' do
+    it { should respond_to(:email) }
+    it { should respond_to(:pw_func) }
+    it { should respond_to(:pw_alg) }
+    it { should respond_to(:pw_cost) }
+    it { should respond_to(:pw_key_size) }
+    it { should respond_to(:pw_nonce) }
+    it { should respond_to(:encrypted_password) }
+  end
 
-    it "can check a password hash" do
-      p = User.hash_password("test")
-      check = User.test_password("test", p)
-
-      expect(check).to eql(true)
-    end
-
-    it "creates a different hash for different users" do
-      p = User.hash_password("test")
-      p2 = User.hash_password("test")
-
-      expect(p).not_to eql(p2)
-    end
-
-    it "validates same passwords for different users" do
-      p = User.hash_password("test")
-      p2 = User.hash_password("test")
-
-      check1 = User.test_password("test", p)
-      expect(check1).to eql(true)
-
-      check2 = User.test_password("test", p2)
-      expect(check2).to eql(true)
-    end
+  context 'validations' do
+    it { should validate_presence_of(:email) }
+    it { should allow_value('foobar').for(:email) }
+    it { should allow_value('foobar@bar.com').for(:email) }
+    it { should allow_value('foo_bar').for(:email) }
+    it { should allow_value('1800').for(:email) }
+    it { should_not allow_value('#$%^').for(:email) }
   end
 
   context "with a single user" do
     it "orders items chronologically" do
-      u = User.create!
+      u = User.create(email: 'foo@bar.com')
       item1 = u.items.create!
       sleep(1)
       item2 = u.items.create!

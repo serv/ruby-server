@@ -85,6 +85,24 @@ Dropbox client id
 
 Dropbox client secret
 
+### Running tests
+
+Ruby Standard File Server uses [rspec-rails](https://github.com/rspec/rspec-rails)
+with [shoulda-matchers](https://github.com/thoughtbot/shoulda-matchers) for testing.
+In order to run the tests, please run the follow commands.
+
+When you are running the tests for the first time, run:
+
+  ```
+  rails db:test:prepare
+  ```
+
+After that, run the following command to actually start rspec test suite:
+
+  ```
+  bundle exec rspec
+  ```
+
 ## Contributing
 Contributions are encouraged and welcome. Currently outstanding items:
 
